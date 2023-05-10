@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Pesquisa de campo</title>
+</head>
+<body>
+    <header>
+        <h1 class="title">Pesquisa Turma 2005 &copy;</h1>
+    </header>
+    <div class="sub">
+        <h1>Responda as perguntas abaixo para participar!</h1>
+    </div>
+
+    <div class="teste">
+
+    
+        <div class="questions">
+            <form name="submit-to-google-sheet1">
+                <h2>Qual seu nome?</h2>
+                <input type="text" name="Nome" id="Nome" class="input">
+
+                <h2>De qual turma você é?</h2>
+                <input type="text" name="Turma" id="Turma" class="input">
+
+                <h2>Das opções abaixo, qual a que você mais gosta?</h2>
+
+                <select name="Preferencia" class="input">
+                    <option value="Doces">Doces</option>
+                    <option value="Salgados">Salgados</option>
+                    <option value="Outros">Outros</option>
+                </select>
+
+                <h2>Caso a opção acima seja "outros", qual sua sujestão?</h2>
+                <input type="text" name="Sujestao" id="Sujestao" class="input">
+
+                <h2>Por ultimo, você irá participar do projeto no dia selecionado?</h2>
+                <select name="Participacao" class="input" id="Participação">
+                    <option value="Sim">Sim</option>
+                    <option value="Nao">Não</option>
+                </select>
+
+                <button type="submit" id="finalizar" onclick="alert('Obrigado por participar!')">Finalizar</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxlzHiCT2IfDt4icUv5DJWu3JI1LkApMmRjK7-Q_Keqvwhd9He7yUxpfkZRGuhiqMw0/exec'
+        const form= document.forms[ 'submit-to-google-sheet1']
+
+        form.addEventListener('submit', e=>{
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log ('Sucess!', response))
+            .catch(error => console.error('Error!' , error.message))
+            form.reset();
+        })
+    </script>
+</body>
+</html>
